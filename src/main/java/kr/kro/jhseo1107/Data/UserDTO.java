@@ -6,43 +6,35 @@ public class UserDTO {
     private String userEmail;
     private String userPassword;
 
-    public int getUserNo()
-    {
+    public int getUserNo() {
         return this.userNo;
     }
 
-    public void setUserNo(int value)
-    {
+    public void setUserNo(int value) {
         this.userNo = value;
     }
 
-    public String getUserName()
-    {
+    public String getUserName() {
         return this.userName;
     }
 
-    public void setUserName(String value)
-    {
+    public void setUserName(String value) {
         this.userName = value;
     }
 
-    public String getUserEmail()
-    {
+    public String getUserEmail() {
         return this.userEmail;
     }
 
-    public void setUserEmail(String value)
-    {
+    public void setUserEmail(String value) {
         this.userEmail = value;
     }
 
-    public String getUserPassword()
-    {
+    public String getUserPassword() {
         return this.userPassword;
     }
 
-    public void setUserPassword(String value)
-    {
+    public void setUserPassword(String value) {
         this.userPassword = value;
     }
 }

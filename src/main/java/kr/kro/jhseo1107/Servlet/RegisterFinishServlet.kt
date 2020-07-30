@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @WebServlet(name = "kr.kro.jhseo1107.Servlet.RegisterFinishServlet", value = ["/registerFinish"])
-class RegisterFinishServlet: HttpServlet() {
+class RegisterFinishServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
     }
@@ -18,8 +18,7 @@ class RegisterFinishServlet: HttpServlet() {
         doProcess(req, res)
     }
 
-    private fun doProcess(req: HttpServletRequest, res: HttpServletResponse)
-    {
+    private fun doProcess(req: HttpServletRequest, res: HttpServletResponse) {
         res.contentType = "text/plain; charset=utf-8"
 
         var authfromuser = req.getParameter("auth")
@@ -28,8 +27,7 @@ class RegisterFinishServlet: HttpServlet() {
 
         var jsonobj = JSONObject()
 
-        if(authfromuser == authfromsession)
-        {
+        if (authfromuser == authfromsession) {
             var userdto = UserDTO()
             var userdao = UserDAO()
 
@@ -42,9 +40,7 @@ class RegisterFinishServlet: HttpServlet() {
             userdao.disconnect()
 
             jsonobj.put("status", 200)
-        }
-        else
-        {
+        } else {
             jsonobj.put("status", 403)
         }
 
