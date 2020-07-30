@@ -53,11 +53,6 @@ class LoginServlet : HttpServlet() {
         else
         {
             jsonobject.put("status", 403)
-            jsonobject.put("userpassword", hashedpw)
-            jsonobject.put("dbuserno", userdto?.userNo)
-            jsonobject.put("dbusermail", userdto?.userEmail)
-            jsonobject.put("dbusername", userdto?.userName)
-            jsonobject.put("dbpassword", userdto?.userPassword)
         }
 
         res.writer.print(jsonobject.toJSONString())

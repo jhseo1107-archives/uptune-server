@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "kr.kro.jhseo1107.Servlet.GetMainServlet", value = ["/getMain"])
-class GetMainServlet : HttpServlet() {
+@WebServlet(name = "kr.kro.jhseo1107.Servlet.LogoutServlet", value = ["/logout"])
+class LogoutServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
     }
@@ -20,17 +20,17 @@ class GetMainServlet : HttpServlet() {
         res.contentType = "text/plain; charset=utf-8"
 
         var session = req.getSession(true)
-        var jsonObject = JSONObject()
-
+        var jsonobject = JSONObject()
 
         if(session.getAttribute("type") == "register" || session.getAttribute("type") == null)
         {
-            jsonObject.put("status", 403)
-            res.writer.print(jsonObject.toJSONString())
+            jsonobject.put("status", 400)
+            res.writer.print(jsonobject.toJSONString())
             return
         }
-        jsonObject.put("status", 200)
 
-        res.writer.print(jsonObject.toJSONString())
+        session.invalidate()
+        jsonobject.put("status", 200)
+        res.writer.print(jsonobject.toJSONString())
     }
 }
