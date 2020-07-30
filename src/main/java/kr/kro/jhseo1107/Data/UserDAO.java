@@ -1,5 +1,7 @@
 package kr.kro.jhseo1107.Data;
 
+import kr.kro.jhseo1107.Util.DBProperties;
+
 import java.sql.*;
 
 public class UserDAO {
@@ -10,7 +12,7 @@ public class UserDAO {
         {
             Class.forName("org.mariadb.jdbc.Driver");
 
-            con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/uptune","root","password");
+            con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/uptune","root", DBProperties.DBPassword());
 
         }
         catch(Exception e)

@@ -39,12 +39,12 @@ class RegisterStartServlet: HttpServlet() {
         var userdao = UserDAO()
         var userdto = userdao.getFromUserEmail(mail)
 
-        if(userdto != null) // if email exists on db
+        /*if(userdto != null) // if email exists on db
         {
             jsonobj.put("status", 409);
             res.writer.print(jsonobj.toJSONString())
             return;
-        }
+        }*/
 
         var session = req.getSession(true)
         session.maxInactiveInterval = 300
