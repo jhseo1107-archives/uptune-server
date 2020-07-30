@@ -120,7 +120,7 @@ public class UserDAO {
     }
 
     public UserDTO getFromUserNo(int userNo) {
-        UserDTO returndto = null;
+        UserDTO returndto = new UserDTO();
         PreparedStatement statement = null;
         ResultSet set = null;
 
@@ -187,7 +187,7 @@ public class UserDAO {
     }
 
     public UserDTO getFromUserEmail(String userEmail) {
-        UserDTO returndto = null;
+        UserDTO returndto = new UserDTO();
         PreparedStatement statement = null;
         ResultSet set = null;
 
@@ -196,12 +196,14 @@ public class UserDAO {
             statement.setString(1, userEmail);
             set = statement.executeQuery();
 
-            while (set.next()) {
-                returndto.setUserNo(set.getInt(1));
-                returndto.setUserEmail(set.getString(2));
-                returndto.setUserName(set.getString(3));
-                returndto.setUserPassword(set.getString(4));
+            while(set.next())
+            {
+                returndto.setUserNo(set.getInt("USER_NO"));
+                returndto.setUserEmail(set.getString("USERNAME"));
+                returndto.setUserName(set.getString("MAIL"));
+                returndto.setUserPassword(set.getString("PW"));
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();

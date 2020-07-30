@@ -27,6 +27,7 @@ class RegisterFinishServlet : HttpServlet() {
 
         var jsonobj = JSONObject()
 
+
         if (authfromuser == authfromsession) {
             var userdto = UserDTO()
             var userdao = UserDAO()

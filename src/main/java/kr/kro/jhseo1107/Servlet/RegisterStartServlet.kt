@@ -24,6 +24,8 @@ class RegisterStartServlet : HttpServlet() {
     private fun doProcess(req: HttpServletRequest, res: HttpServletResponse) {
         res.contentType = "text/plain; charset=utf-8"
 
+        req.getSession(true).invalidate()
+
         var mail = req.getParameter("mail")
         var rawpw = req.getParameter("pw")
         var username = req.getParameter("usrname")
@@ -48,6 +50,7 @@ class RegisterStartServlet : HttpServlet() {
         var session = req.getSession(true)
         session.maxInactiveInterval = 300
 
+        session.setAttribute("type", "register")
         session.setAttribute("mail", mail)
         session.setAttribute("pw", hashedpw)
         session.setAttribute("auth", rannum)

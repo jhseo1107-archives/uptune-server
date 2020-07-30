@@ -7,7 +7,7 @@ public class UserDTO {
     private String userPassword;
 
     public int getUserNo() {
-        return this.userNo;
+        return userNo;
     }
 
     public void setUserNo(int value) {
@@ -15,7 +15,7 @@ public class UserDTO {
     }
 
     public String getUserName() {
-        return this.userName;
+        return userName;
     }
 
     public void setUserName(String value) {
@@ -23,7 +23,7 @@ public class UserDTO {
     }
 
     public String getUserEmail() {
-        return this.userEmail;
+        return userEmail;
     }
 
     public void setUserEmail(String value) {
@@ -31,7 +31,7 @@ public class UserDTO {
     }
 
     public String getUserPassword() {
-        return this.userPassword;
+        return userPassword;
     }
 
     public void setUserPassword(String value) {
