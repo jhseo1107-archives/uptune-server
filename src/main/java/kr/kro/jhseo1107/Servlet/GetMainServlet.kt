@@ -1,5 +1,6 @@
 package kr.kro.jhseo1107.Servlet
 
+import kr.kro.jhseo1107.Util.isCorrectSession
 import org.json.simple.JSONObject
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
@@ -23,7 +24,7 @@ class GetMainServlet : HttpServlet() {
         var jsonObject = JSONObject()
 
 
-        if(session.getAttribute("type") == "register" || session.getAttribute("type") == null)
+        if(isCorrectSession(session))
         {
             jsonObject.put("status", 403)
             res.writer.print(jsonObject.toJSONString())

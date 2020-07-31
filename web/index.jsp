@@ -12,6 +12,7 @@
   </head>
   <body>
   Seems like you are on the wrong side of the web.<br>
-  <a href="https://jhseo1107.kro.kr/">You can still visit my homepage though.</a>
+  <a href="https://jhseo1107.kro.kr/">You can still visit my homepage though.</a><br>
+  <a href="./utuclogin.jsp">Are you a manager?</a>
   </body>
 </html>
