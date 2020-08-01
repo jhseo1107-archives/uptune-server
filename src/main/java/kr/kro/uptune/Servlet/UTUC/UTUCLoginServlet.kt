@@ -3,6 +3,7 @@ package kr.kro.uptune.Servlet.UTUC
 import kr.kro.jhseo1107.EncryptBuilder1107
 import kr.kro.jhseo1107.EncryptMethod
 import kr.kro.uptune.Data.UserDAO
+import kr.kro.uptune.Data.UserDTO
 import org.json.simple.JSONObject
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
@@ -22,6 +23,8 @@ class UTUCLoginServlet : HttpServlet() {
     private fun doProcess(req: HttpServletRequest, res: HttpServletResponse) {
         res.contentType = "text/plain; charset=utf-8"
 
+        req.getSession(true).invalidate()
+
         var mail = req.getParameter("userID")
         var rawpw = req.getParameter("userPW")
 
@@ -30,11 +33,14 @@ class UTUCLoginServlet : HttpServlet() {
 
         var userdao = UserDAO()
 
-        var serversidepw = userdao.getFromUserEmail(mail).userPassword
+        var userdto = UserDTO()
 
-        if(serversidepw == hashedpw)
+        userdto = userdao.getFromUserEmail(mail)
+
+        var serversidepw = userdto.userPassword
+
+        if(serversidepw == hashedpw && userdto.userIsAdmin)
         {
-            req.getSession(true).invalidate()
             var session = req.getSession(true)
             session.setAttribute("type","utuc")
             session.setAttribute("mail", mail)

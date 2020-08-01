@@ -5,7 +5,7 @@ import kr.kro.uptune.Util.TomcatProperties;
 import java.sql.*;
 
 public class UserDAO {
-    private static Connection con = null;
+    protected static Connection con = null;
 
     public UserDAO() {
         try {

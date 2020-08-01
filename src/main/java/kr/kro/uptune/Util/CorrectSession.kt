@@ -11,3 +11,11 @@ fun isCorrectSession(session: HttpSession): Boolean
     }
     return true;
 }
+fun isCorrectUTUCSession(session: HttpSession): Boolean
+{
+    if(session.getAttribute("type") == "register" || session.getAttribute("type") == "login" || session.getAttribute("type") == null)
+    {
+        return false;
+    }
+    return true;
+}
