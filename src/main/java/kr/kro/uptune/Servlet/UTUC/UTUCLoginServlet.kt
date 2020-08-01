@@ -1,4 +1,4 @@
-package kr.kro.uptune.Servlet
+package kr.kro.uptune.Servlet.UTUC
 
 import kr.kro.jhseo1107.EncryptBuilder1107
 import kr.kro.jhseo1107.EncryptMethod
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "kr.kro.jhseo1107.Servlet.UTUCLoginServlet", value = ["/UTUCLogin"])
+@WebServlet(name = "kr.kro.jhseo1107.Servlet.UTUCLoginServlet", value = ["/utuc/UTUCLogin"])
 class UTUCLoginServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
@@ -38,12 +38,11 @@ class UTUCLoginServlet : HttpServlet() {
             var session = req.getSession(true)
             session.setAttribute("type","utuc")
             session.setAttribute("mail", mail)
+            res.sendRedirect("./utucedit.jsp")
         }
         else
         {
-            var jsonObject = JSONObject()
-            jsonObject.put("status", "403")
-            res.writer.print(jsonObject.toJSONString())
+            res.writer.print("HTTP CODE 403 - 권한 부족. 올바른 비밀번호를 입력했는지, 혹시 어드민 등록이 안되지는 않았는지 다시 한번 확인해 주세요. 문의 : seojanghyeob@gmail.com")
         }
     }
 }
