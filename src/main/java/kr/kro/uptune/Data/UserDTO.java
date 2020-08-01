@@ -1,4 +1,4 @@
-package kr.kro.jhseo1107.Data;
+package kr.kro.uptune.Data;
 
 public class UserDTO {
     private int userNo;

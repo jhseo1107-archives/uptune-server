@@ -1,6 +1,6 @@
-package kr.kro.jhseo1107.Servlet
+package kr.kro.uptune.Servlet
 
-import kr.kro.jhseo1107.Data.UTUCDAO
+import kr.kro.uptune.Data.UTUCDAO
 import kr.kro.jhseo1107.EncryptBuilder1107
 import kr.kro.jhseo1107.EncryptMethod
 import org.json.simple.JSONObject

@@ -1,4 +1,4 @@
-package kr.kro.jhseo1107.Util
+package kr.kro.uptune.Util
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession

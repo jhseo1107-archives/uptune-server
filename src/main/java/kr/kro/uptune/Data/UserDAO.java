@@ -1,6 +1,6 @@
-package kr.kro.jhseo1107.Data;
+package kr.kro.uptune.Data;
 
-import kr.kro.jhseo1107.Util.TomcatProperties;
+import kr.kro.uptune.Util.TomcatProperties;
 
 import java.sql.*;
 

@@ -1,6 +1,6 @@
-package kr.kro.jhseo1107.Servlet
+package kr.kro.uptune.Servlet
 
-import kr.kro.jhseo1107.Util.isCorrectSession
+import kr.kro.uptune.Util.isCorrectSession
 import org.json.simple.JSONObject
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet

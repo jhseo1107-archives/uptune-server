@@ -1,7 +1,7 @@
-package kr.kro.jhseo1107.Servlet
+package kr.kro.uptune.Servlet
 
-import kr.kro.jhseo1107.Data.UserDAO
-import kr.kro.jhseo1107.Data.UserDTO
+import kr.kro.uptune.Data.UserDAO
+import kr.kro.uptune.Data.UserDTO
 import org.json.simple.JSONObject
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet

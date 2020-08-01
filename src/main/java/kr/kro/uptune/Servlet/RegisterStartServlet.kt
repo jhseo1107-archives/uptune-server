@@ -1,9 +1,9 @@
-package kr.kro.jhseo1107.Servlet
+package kr.kro.uptune.Servlet
 
-import kr.kro.jhseo1107.Data.UserDAO
+import kr.kro.uptune.Data.UserDAO
 import kr.kro.jhseo1107.EncryptBuilder1107
 import kr.kro.jhseo1107.EncryptMethod
-import kr.kro.jhseo1107.Util.SendMail
+import kr.kro.uptune.Util.SendMail
 import org.json.simple.JSONObject
 import java.util.*
 import javax.servlet.annotation.WebServlet
