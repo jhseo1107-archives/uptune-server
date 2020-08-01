@@ -5,6 +5,7 @@ public class UserDTO {
     private String userName;
     private String userEmail;
     private String userPassword;
+    private boolean userIsAdmin = false;
 
     public int getUserNo() {
         return userNo;
@@ -36,5 +37,14 @@ public class UserDTO {
 
     public void setUserPassword(String value) {
         this.userPassword = value;
+    }
+
+    public boolean getUserIsAdmin() {
+        return userIsAdmin;
+    }
+
+    public void setUserIsAdmin(boolean value)
+    {
+        this.userIsAdmin = value;
     }
 }

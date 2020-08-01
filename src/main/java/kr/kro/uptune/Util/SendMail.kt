@@ -23,11 +23,11 @@ fun SendMail(sender: String, reciever: String, content: String) {
         }
     });
 
-    session.debug = true
+    // session.debug = true
 
 
     var message = MimeMessage(session)
-    message.setFrom(InternetAddress(from))
+    message.setFrom(InternetAddress(from, "Uptune"))
     message.addRecipient(Message.RecipientType.TO, InternetAddress(to))
     message.setSubject("업튠 가입을 환영합니다!")
     message.setText("저희 업튠을 이용해주셔서 감사합니다! 입력해야 하는 보안 코드는 " + content + "입니다.")

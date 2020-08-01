@@ -21,11 +21,12 @@ public class UserDAO {
         PreparedStatement statement = null;
         ResultSet set = null;
         try {
-            statement = con.prepareStatement("INSERT INTO USER_TABLE VALUES (?,?,?,?)");
+            statement = con.prepareStatement("INSERT INTO USER_TABLE VALUES (?,?,?,?,?)");
             statement.setInt(1, dto.getUserNo());
             statement.setString(2, dto.getUserName());
             statement.setString(3, dto.getUserEmail());
             statement.setString(4, dto.getUserPassword());
+            statement.setBoolean(5, dto.getUserIsAdmin());
 
             set = statement.executeQuery();
 
@@ -134,6 +135,7 @@ public class UserDAO {
                 returndto.setUserEmail(set.getString(2));
                 returndto.setUserName(set.getString(3));
                 returndto.setUserPassword(set.getString(4));
+                returndto.setUserIsAdmin(set.getBoolean(5));
             }
 
         } catch (Exception e) {
@@ -198,10 +200,11 @@ public class UserDAO {
 
             while(set.next())
             {
-                returndto.setUserNo(set.getInt("USER_NO"));
-                returndto.setUserEmail(set.getString("USERNAME"));
-                returndto.setUserName(set.getString("MAIL"));
-                returndto.setUserPassword(set.getString("PW"));
+                returndto.setUserNo(set.getInt(1));
+                returndto.setUserEmail(set.getString(2));
+                returndto.setUserName(set.getString(3));
+                returndto.setUserPassword(set.getString(4));
+                returndto.setUserIsAdmin(set.getBoolean(5));
             }
 
 
