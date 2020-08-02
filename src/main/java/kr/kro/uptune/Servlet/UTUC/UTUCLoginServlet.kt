@@ -23,7 +23,8 @@ class UTUCLoginServlet : HttpServlet() {
     private fun doProcess(req: HttpServletRequest, res: HttpServletResponse) {
         res.contentType = "text/plain; charset=utf-8"
 
-        req.getSession(true).invalidate()
+        var temsess = req.getSession(true)
+        temsess.invalidate()
 
         var mail = req.getParameter("userID")
         var rawpw = req.getParameter("userPW")

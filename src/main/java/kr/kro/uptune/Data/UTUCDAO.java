@@ -4,6 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UTUCDAO extends  UserDAO{
+    public UTUCDAO()
+    {
+        super();
+    }
+
     public void editToAdmin(String mail)
     {
         PreparedStatement statement = null;

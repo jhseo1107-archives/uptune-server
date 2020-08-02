@@ -16,5 +16,6 @@
     <input type="password" placeholder="PW" name="userPW" maxlength="25">
     <input type="submit" value="Login">
 </form>
+* 현재 로그인이 한번에 진행되지 않는 이슈가 있습니다. 우선 로그인을 하신 후, 재접속해서 로그인을 다시 한 번 시도해 주세요.
 </body>
 </html>

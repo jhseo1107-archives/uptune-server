@@ -11,10 +11,18 @@
     <title>UTUC - Uptune Tutorial Upload Center</title>
 </head>
 <body>
+
+<%
+
+%>
+
+
 Add admin user...<br>
 <form method="post" action="./UTUCAdminAdd">
     <input type="text" placeholder="ID" name="userID" maxlength="25">
     <input type="submit" value="Add">
 </form>
+강좌 목록
+
 </body>
 </html>
