@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "kr.kro.uptune.Servlet.WriteCommentServlet", value = ["/WriteComment"])
+@WebServlet(name = "kr.kro.uptune.Servlet.WriteCommentServlet", value = ["/writeComment"])
 class WriteCommentServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
@@ -29,7 +29,7 @@ class WriteCommentServlet : HttpServlet() {
         var jsonObject = JSONObject()
 
 
-        if(isCorrectSession(session))
+        if(!isCorrectSession(session))
         {
             jsonObject.put("status", 403)
             res.writer.print(jsonObject.toJSONString())
@@ -39,7 +39,7 @@ class WriteCommentServlet : HttpServlet() {
         var commentdao = CommentDAO()
         var commentdto = CommentDTO()
 
-        var userNo = Integer.valueOf(session.getAttribute("userno") as String)
+        var userNo = Integer.valueOf(session.getAttribute("userno") as String?)
 
         var commentContent = req.getParameter("content")
         var commentParent = Integer.valueOf(req.getParameter("parent"))
