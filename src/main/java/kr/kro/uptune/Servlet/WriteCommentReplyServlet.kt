@@ -2,7 +2,8 @@ package kr.kro.uptune.Servlet
 
 import kr.kro.uptune.Data.CommentDAO
 import kr.kro.uptune.Data.CommentDTO
-import kr.kro.uptune.Data.UserDAO
+import kr.kro.uptune.Data.CommentReplyDAO
+import kr.kro.uptune.Data.CommentReplyDTO
 import kr.kro.uptune.Util.isCorrectSession
 import org.json.simple.JSONObject
 import java.sql.Timestamp
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "kr.kro.uptune.Servlet.WriteCommentServlet", value = ["/writeComment"])
-class WriteCommentServlet : HttpServlet() {
+@WebServlet(name = "kr.kro.uptune.Servlet.WriteCommentReplyServlet", value = ["/writeCommentReply"])
+class WriteCommentReplyServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
     }
@@ -36,26 +37,23 @@ class WriteCommentServlet : HttpServlet() {
             return
         }
 
-        var commentdao = CommentDAO()
-        var commentdto = CommentDTO()
+        var commentreplydao = CommentReplyDAO()
+        var commentreplydto = CommentReplyDTO()
 
         var userNo = session.getAttribute("userno") as Int
 
         var commentContent = req.getParameter("content")
         var commentParent = Integer.valueOf(req.getParameter("parent"))
-        var commentParentType = Integer.valueOf(req.getParameter("parenttype"))
 
-        commentdto.commentId = commentdao.count() + 1
-        commentdto.commentContent = commentContent
-        commentdto.commentParentId = commentParent
-        commentdto.commentParentType = commentParentType
-        commentdto.commentWriter = userNo
-        commentdto.commentTimeStamp = Timestamp(System.currentTimeMillis())
+        commentreplydto.commentReplyId = commentreplydao.count() + 1
+        commentreplydto.commentReplyContent = commentContent
+        commentreplydto.commentReplyParentId = commentParent
+        commentreplydto.commentReplyWriter = userNo
+        commentreplydto.commentReplyTimestamp = Timestamp(System.currentTimeMillis())
 
-        commentdao.write(commentdto)
-        commentdao.disconnect()
+        commentreplydao.write(commentreplydto)
+        commentreplydao.disconnect()
 
         jsonObject.put("status", 200)
-
     }
 }

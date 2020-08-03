@@ -40,7 +40,7 @@ Add admin user...<br>
 %>
 강좌 추가<br>
 <form method="post" action="./UTUCClassAdd">
-    <input type="text" placeholder="강좌 이름" name="className" maxlength="20">
+    <input type="text" placeholder="강좌 이름" name="className" maxlength="100">
     <input type="submit" value="Add">
 </form>
 

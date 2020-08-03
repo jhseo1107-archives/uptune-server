@@ -25,7 +25,7 @@ class GetMainServlet : HttpServlet() {
         var jsonObject = JSONObject()
 
 
-        if(isCorrectSession(session))
+        if(!isCorrectSession(session))
         {
             jsonObject.put("status", 403)
             res.writer.print(jsonObject.toJSONString())

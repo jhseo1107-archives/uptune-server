@@ -30,7 +30,7 @@
 강좌 정보 <br>
 <form method="post" action="./UTUCClassEdit">
     <input type="hidden" name="classId" value="<%=classdto.getClassId()%>">
-    <input type="text" name="className" maxlength="20" value="<%=classdto.getClassName()%>">
+    <input type="text" name="className" maxlength="100" value="<%=classdto.getClassName()%>">
     <input type="text" name="classTimeStamp" readonly="readonly" value="<%=sdf.format(classdto.getClassTimeStamp())%>">
     <input type="text" name="classWriterDisplay" readonly="readonly" value="<%=userdao.getFromUserNo(classdto.getClassWriter()).getUserEmail()%>">
     <input type="hidden" name="classWriter" value="<%=classdto.getClassWriter()%>">
