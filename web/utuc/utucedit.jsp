@@ -34,7 +34,6 @@ Add admin user...<br>
     <input type="hidden" name="classId" value=<%= classdto.getClassId()%>>
     <input type="submit" value=<%= classdto.getClassName() %>>
 </form>
-<br>
 <%
     }
 %>

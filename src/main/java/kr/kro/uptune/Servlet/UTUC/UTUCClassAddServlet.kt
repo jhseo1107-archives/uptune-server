@@ -48,5 +48,6 @@ class UTUCClassAddServlet : HttpServlet() {
 
         classdao.write(classdto)
 
+        res.sendRedirect("./utucclassedit.jsp?classId="+classdto.classId)
     }
 }

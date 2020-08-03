@@ -149,6 +149,8 @@ public class ClassDAO {
                 tempdto.setClassTimeStamp(set.getTimestamp(3));
                 tempdto.setClassWriter(set.getInt(4));
                 tempdto.setClassVideo(childdao.getFromParentId(set.getInt(1)));
+
+                returndto.add(tempdto);
             }
 
 
