@@ -3,6 +3,7 @@ package kr.kro.uptune.Data;
 import kr.kro.uptune.Util.TomcatProperties;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ClassDAO {
     protected static Connection con = null;
@@ -105,6 +106,49 @@ public class ClassDAO {
                 returndto.setClassTimeStamp(set.getTimestamp(3));
                 returndto.setClassWriter(set.getInt(4));
                 returndto.setClassVideo(childdao.getFromParentId(classId));
+            }
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
+                if (set != null)
+                    set.close();
+                childdao.disconnect();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return returndto;
+    }
+    public ArrayList<ClassDTO> getAll()
+    {
+        ArrayList<ClassDTO> returndto = new ArrayList<ClassDTO>();
+        PreparedStatement statement = null;
+        ResultSet set = null;
+
+        ClassVideoDAO childdao = new ClassVideoDAO();
+
+        try {
+            statement = con.prepareStatement("SELECT * FROM CLASS_TABLE");
+            set = statement.executeQuery();
+
+            while (set.next()) {
+                ClassDTO tempdto = new ClassDTO();
+
+                tempdto.setClassId(set.getInt(1));
+                tempdto.setClassName(set.getString(2));
+                tempdto.setClassTimeStamp(set.getTimestamp(3));
+                tempdto.setClassWriter(set.getInt(4));
+                tempdto.setClassVideo(childdao.getFromParentId(set.getInt(1)));
             }
 
 

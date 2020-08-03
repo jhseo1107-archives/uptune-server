@@ -1,4 +1,7 @@
-<%--
+<%@ page import="kr.kro.uptune.Data.ClassDTO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="kr.kro.uptune.Data.ClassDAO" %>
+<%@ page import="java.util.Iterator" %><%--
   Created by IntelliJ IDEA.
   User: seoja
   Date: 2020-08-01
@@ -13,7 +16,9 @@
 <body>
 
 <%
-
+ClassDAO classdao = new ClassDAO();
+ArrayList<ClassDTO> classlist = classdao.getAll();
+Iterator<ClassDTO> classiterator = classlist.iterator();
 %>
 
 
@@ -21,8 +26,25 @@ Add admin user...<br>
 <form method="post" action="./UTUCAdminAdd">
     <input type="text" placeholder="ID" name="userID" maxlength="25">
     <input type="submit" value="Add">
+</form><br>
+강좌 목록<br>
+<%
+    while(classiterator.hasNext()) {
+        ClassDTO classdto = classiterator.next();
+%>
+<form method="get" action="./">
+    <input type="hidden" id="classId" value=<%= classdto.getClassId()%>>
+    <input type="submit" value=<%= classdto.getClassName() %>>
 </form>
-강좌 목록
+<br>
+<%
+    }
+%>
+강좌 추가<br>
+<form method="post" action="./UTUCClassAdd">
+    <input type="text" placeholder="강좌 이름" name="className" maxlength="20">
+    <input type="submit" value="Add">
+</form>
 
 </body>
 </html>

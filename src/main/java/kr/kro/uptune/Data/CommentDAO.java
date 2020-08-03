@@ -120,6 +120,7 @@ public class CommentDAO {
                     statement.close();
                 if (set != null)
                     set.close();
+                childdao.disconnect();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -165,6 +166,7 @@ public class CommentDAO {
                     statement.close();
                 if (set != null)
                     set.close();
+                childdao.disconnect();
 
             } catch (Exception e) {
                 e.printStackTrace();
