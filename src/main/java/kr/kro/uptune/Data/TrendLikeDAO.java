@@ -3,12 +3,11 @@ package kr.kro.uptune.Data;
 import kr.kro.uptune.Util.TomcatProperties;
 
 import java.sql.*;
-import java.util.ArrayList;
 
-public class ClassVideoViewDAO { // 시청 여부 저장 DAO. 클래스명 비직관적이어서 주석처리
+public class TrendLikeDAO {
     private static Connection con = null;
 
-    public ClassVideoViewDAO()
+    public TrendLikeDAO()
     {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
@@ -19,15 +18,15 @@ public class ClassVideoViewDAO { // 시청 여부 저장 DAO. 클래스명 비�
         }
     }
 
-    public void write(int userId, int videoId)
+    public void write(int userId, int trendId)
     {
         PreparedStatement statement = null;
         ResultSet set = null;
         try {
-            statement = con.prepareStatement("INSERT INTO CLASS_VIDEO_VIEW_TABLE VALUES (?,?,?)");
+            statement = con.prepareStatement("INSERT INTO TREND_LIKE_TABLE VALUES (?,?,?)");
             statement.setInt(1, count()+1);
             statement.setInt(2, userId);
-            statement.setInt(3, videoId);
+            statement.setInt(3, trendId);
 
             set = statement.executeQuery();
 
@@ -57,7 +56,7 @@ public class ClassVideoViewDAO { // 시청 여부 저장 DAO. 클래스명 비�
         ResultSet set = null;
         try {
 
-            statement = con.prepareStatement("SELECT COUNT(*) FROM CLASS_VIDEO_VIEW_TABLE");
+            statement = con.prepareStatement("SELECT COUNT(*) FROM TREND_LIKE_TABLE");
             set = statement.executeQuery();
 
             while (set.next()) {
@@ -90,7 +89,7 @@ public class ClassVideoViewDAO { // 시청 여부 저장 DAO. 클래스명 비�
         }
     }
 
-    public boolean hasViewed(int userId, int videoId)
+    public boolean hasLiked(int userId, int trendId)
     {
         boolean returnvalue = false;
 
@@ -98,9 +97,9 @@ public class ClassVideoViewDAO { // 시청 여부 저장 DAO. 클래스명 비�
         ResultSet set = null;
         try {
 
-            statement = con.prepareStatement("SELECT COUNT(*) FROM CLASS_VIDEO_VIEW_TABLE WHERE USERID = ? AND VIDEOID = ?");
+            statement = con.prepareStatement("SELECT COUNT(*) FROM TREND_LIKE_TABLE WHERE USERID = ? AND TRENDID = ?");
             statement.setInt(1, userId);
-            statement.setInt(2, videoId);
+            statement.setInt(2, trendId);
             set = statement.executeQuery();
 
             while (set.next()) {
@@ -122,27 +121,6 @@ public class ClassVideoViewDAO { // 시청 여부 저장 DAO. 클래스명 비�
             }
 
         }
-
-        return returnvalue;
-    }
-    public int viewPercentage(int userId, int classId)
-    {
-        int returnvalue;
-
-        int viewedcount = 0;
-
-        ClassDAO classdao = new ClassDAO();
-
-        ArrayList<ClassVideoDTO> videolist = classdao.getFromClassId(classId).getClassVideo();
-
-        for(int i= 0; i<videolist.size(); i++)
-        {
-            if(hasViewed(userId, videolist.get(i).getClassVideoId()))
-                viewedcount++;
-
-        }
-
-        returnvalue = 100 * (viewedcount/videolist.size());
 
         return returnvalue;
     }

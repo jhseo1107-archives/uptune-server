@@ -23,7 +23,7 @@ class LogoutServlet : HttpServlet() {
         var session = req.getSession(true)
         var jsonobject = JSONObject()
 
-        if(isCorrectSession(session))
+        if(!isCorrectSession(session))
         {
             jsonobject.put("status", 400)
             res.writer.print(jsonobject.toJSONString())

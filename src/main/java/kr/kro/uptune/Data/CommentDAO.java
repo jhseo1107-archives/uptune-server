@@ -50,6 +50,34 @@ public class CommentDAO {
 
         }
     }
+    public void update(CommentDTO dto)
+    {
+        PreparedStatement statement = null;
+        ResultSet set = null;
+        try {
+            statement = con.prepareStatement("UPDATE COMMENT_TABLE SET CONTENT = ? WHERE ID = ?");
+            statement.setString(1, dto.getCommentContent());
+            statement.setInt(2, dto.getCommentId());
+            set = statement.executeQuery();
+
+            while (set.next()) {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
+                if (set != null)
+                    set.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 
     public int count() {
         int returnvalue = 0;

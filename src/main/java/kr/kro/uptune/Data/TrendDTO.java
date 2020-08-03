@@ -9,7 +9,7 @@ public class TrendDTO {
     private Timestamp trendTimeStamp;
     private int trendWriter;
     private int trendLikes;
-
+    private String trendFileExtension;
     private ArrayList<CommentDTO> trendComments;
 
     public int getTrendId() {
@@ -50,6 +50,14 @@ public class TrendDTO {
 
     public void setTrendLikes(int trendLikes) {
         this.trendLikes = trendLikes;
+    }
+
+    public String getTrendFileExtension() {
+        return trendFileExtension;
+    }
+
+    public void setTrendFileExtension(String trendFileExtension) {
+        this.trendFileExtension = trendFileExtension;
     }
 
     public ArrayList<CommentDTO> getTrendComments() {

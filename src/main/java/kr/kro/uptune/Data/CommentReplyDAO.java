@@ -49,6 +49,34 @@ public class CommentReplyDAO {
 
         }
     }
+    public void update(CommentReplyDTO dto)
+    {
+        PreparedStatement statement = null;
+        ResultSet set = null;
+        try {
+            statement = con.prepareStatement("UPDATE COMMENT_REPLY_TABLE SET CONTENT = ? WHERE ID = ?");
+            statement.setString(1, dto.getCommentReplyContent());
+            statement.setInt(2, dto.getCommentReplyId());
+            set = statement.executeQuery();
+
+            while (set.next()) {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
+                if (set != null)
+                    set.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 
     public int count() {
         int returnvalue = 0;
@@ -89,7 +117,7 @@ public class CommentReplyDAO {
 
     }
 
-    public CommentReplyDTO getFromCommentId(int commentReplyId) {
+    public CommentReplyDTO getFromCommentReplyId(int commentReplyId) {
         CommentReplyDTO returndto = new CommentReplyDTO();
         PreparedStatement statement = null;
         ResultSet set = null;

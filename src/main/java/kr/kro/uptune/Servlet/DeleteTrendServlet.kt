@@ -2,22 +2,17 @@ package kr.kro.uptune.Servlet
 
 import kr.kro.uptune.Data.TrendDAO
 import kr.kro.uptune.Data.TrendDTO
-import kr.kro.uptune.Util.TomcatProperties
 import kr.kro.uptune.Util.isCorrectSession
 import org.json.simple.JSONObject
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.sql.Timestamp
-import javax.servlet.annotation.MultipartConfig
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import javax.servlet.http.Part
 
-@WebServlet(name = "kr.kro.uptune.Servlet.WriteTrendServlet", value = ["/writeTrend"])
-@MultipartConfig
-class WriteTrendServlet : HttpServlet() {
+@WebServlet(name = "kr.kro.uptune.Servlet.DeleteTrendServlet", value = ["/deleteTrend"])
+class DeleteTrendServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
     }
@@ -43,22 +38,25 @@ class WriteTrendServlet : HttpServlet() {
         var trenddao = TrendDAO()
         var trenddto = TrendDTO()
 
-        var filePart = req.getPart("file")
-        var fileName = Paths.get(filePart.submittedFileName).fileName.toString()
-        var fileNameArray = fileName.toString().split(".")
-        var fileContent = filePart.inputStream
+        var trendid = req.getParameter("trendid")
 
-        trenddto.trendId = trenddao.count()+1
-        trenddto.trendWriter = session.getAttribute("userno") as Int
-        trenddto.trendLikes = 0
-        //trenddto.trendName = session.getAttribute("lastTrendName") as String
-        trenddto.trendName = req.getParameter("trendname")
-        trenddto.trendTimeStamp = Timestamp(System.currentTimeMillis())
-        trenddto.trendFileExtension = fileNameArray.last()
+        trenddto =  trenddao.getFromTrendId(Integer.valueOf(trendid))
 
-        trenddao.write(trenddto)
+        if(trenddto.trendWriter != session.getAttribute("userno"))
+        {
+            jsonObject.put("status", 403)
+            res.writer.print(jsonObject.toJSONString())
+            return
+        }
+
+        trenddto.trendName = "Deleted"
+        trenddao.update(trenddto)
+
         trenddao.disconnect()
-        Files.copy(fileContent, Paths.get(servletContext.getRealPath("Videos/")+trenddto.trendId+"."+trenddto.trendFileExtension));
 
+        Files.deleteIfExists(Paths.get(servletContext.getRealPath("Videos/")+trenddto.trendId+"."+trenddto.trendFileExtension))
+
+        jsonObject.put("status", 200)
+        res.writer.print(jsonObject.toJSONString())
     }
 }
