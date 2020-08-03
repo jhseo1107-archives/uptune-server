@@ -1,10 +1,7 @@
 package kr.kro.uptune.Servlet.UTUC
 
-import kr.kro.uptune.Data.UTUCDAO
 import kr.kro.uptune.Data.UserDAO
-import kr.kro.uptune.Data.UserDTO
 import kr.kro.uptune.Util.isCorrectUTUCSession
-import org.json.simple.JSONObject
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
@@ -30,7 +27,7 @@ class UTUCAdminAddServlet : HttpServlet() {
             res.writer.print("HTTP CODE 403 - 세션이 없습니다.")
             return;
         }
-        var utucdao = UTUCDAO()
-        utucdao.editToAdmin(mail)
+        var userdao = UserDAO()
+        userdao.editToAdmin(mail)
     }
 }

@@ -1,19 +1,14 @@
 package kr.kro.uptune.Servlet.UTUC
 
 import kr.kro.uptune.Data.ClassDAO
-import kr.kro.uptune.Data.ClassDTO
-import kr.kro.uptune.Data.UserDAO
 import kr.kro.uptune.Util.isCorrectUTUCSession
-import kr.kro.uptune.Util.sdf
-import java.sql.Timestamp
-import java.util.*
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "kr.kro.uptune.Servlet.UTUC.UTUCClassAddServlet", value = ["/utuc/UTUCClassAdd"])
-class UTUCClassAddServlet : HttpServlet() {
+@WebServlet(name = "kr.kro.uptune.Servlet.UTUC.UTUCClassEditServlet", value = ["/utuc/UTUCClassEdit"])
+class UTUCClassEditServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
     }
@@ -26,26 +21,33 @@ class UTUCClassAddServlet : HttpServlet() {
         res.contentType = "text/plain; charset=utf-8"
         req.characterEncoding = "UTF-8"
 
-        var classname = req.getParameter("className")
-
         if(!isCorrectUTUCSession(req.getSession(true)))
         {
             res.writer.print("HTTP CODE 403 - 세션이 없습니다.")
             return;
         }
 
+        var classId = req.getParameter("classId")
+        var className = req.getParameter("className")
+        var action = req.getParameter("action")
+
         var classdao = ClassDAO()
-        var classdto = ClassDTO()
-        var userdao = UserDAO()
+        var dto = classdao.getFromClassId(Integer.valueOf(classId))
 
-        classdto.classId = classdao.count() + 1
-        classdto.className = classname
-        classdto.classWriter = userdao.getFromUserEmail(req.getSession(true).getAttribute("mail") as String?).userNo
-        classdto.classTimeStamp = Timestamp(System.currentTimeMillis())
-
-        classdao.write(classdto)
-
-        res.sendRedirect("./utucclassedit.jsp?classId="+classdto.classId)
+        if(action == "수정하기")
+        {
+            dto.className = className
+            classdao.update(dto)
+            res.writer.print("edit")
+            res.sendRedirect("./utucclassedit.jsp?classId="+dto.classId)
+        }
+        else if(action =="삭제하기")
+        {
+            dto.className = "Deleted"
+            classdao.update(dto)
+            res.writer.print("delete")
+            res.sendRedirect("./utucedit.jsp")
+        }
 
     }
 }

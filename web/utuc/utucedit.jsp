@@ -29,10 +29,11 @@ Add admin user...<br>
 강좌 목록<br>
 <%
     for(ClassDTO classdto : classlist) {
+        if(classdto.getClassName().equals("Deleted")) continue;
 %>
 <form method="get" action="./utucclassedit.jsp">
-    <input type="hidden" name="classId" value=<%= classdto.getClassId()%>>
-    <input type="submit" value=<%= classdto.getClassName() %>>
+    <input type="hidden" name="classId" value="<%= classdto.getClassId()%>">
+    <input type="submit" value="<%= classdto.getClassName() %>">
 </form>
 <%
     }

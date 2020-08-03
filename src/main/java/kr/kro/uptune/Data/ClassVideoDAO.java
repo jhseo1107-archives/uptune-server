@@ -21,18 +21,18 @@ public class ClassVideoDAO {
     }
 
     public void write(ClassVideoDTO dto) {
-        PreparedStatement insertstatement = null;
+        PreparedStatement statement = null;
         ResultSet set = null;
         try {
-            insertstatement = con.prepareStatement("INSERT INTO CLASS_VIDEO_TABLE VALUES (?,?,?,?,?,?)");
-            insertstatement.setInt(1, dto.getClassVideoId());
-            insertstatement.setString(2, dto.getClassVideoName());
-            insertstatement.setTimestamp(3, dto.getClassVideoTimeStamp());
-            insertstatement.setInt(4, dto.getClassVideoWriter());
-            insertstatement.setInt(5, dto.getClassVideoParentId());
-            insertstatement.setString(6, dto.getClassVideoLink());
+            statement = con.prepareStatement("INSERT INTO CLASS_VIDEO_TABLE VALUES (?,?,?,?,?,?)");
+            statement.setInt(1, dto.getClassVideoId());
+            statement.setString(2, dto.getClassVideoName());
+            statement.setTimestamp(3, dto.getClassVideoTimeStamp());
+            statement.setInt(4, dto.getClassVideoWriter());
+            statement.setInt(5, dto.getClassVideoParentId());
+            statement.setString(6, dto.getClassVideoLink());
 
-            set = insertstatement.executeQuery();
+            set = statement.executeQuery();
 
             while (set.next()) {
 
@@ -41,8 +41,36 @@ public class ClassVideoDAO {
             e.printStackTrace();
         } finally {
             try {
-                if (insertstatement != null)
-                    insertstatement.close();
+                if (statement != null)
+                    statement.close();
+                if (set != null)
+                    set.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public void update(ClassVideoDTO dto)
+    {
+        PreparedStatement statement = null;
+        ResultSet set = null;
+        try {
+            statement = con.prepareStatement("UPDATE CLASS_VIDEO_TABLE SET NAME = ? WHERE ID = ?");
+            statement.setString(1, dto.getClassVideoName());
+            statement.setInt(2, dto.getClassVideoId());
+            set = statement.executeQuery();
+
+            while (set.next()) {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
                 if (set != null)
                     set.close();
 

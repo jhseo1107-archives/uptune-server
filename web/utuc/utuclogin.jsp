@@ -16,5 +16,6 @@
     <input type="password" placeholder="PW" name="userPW" maxlength="25">
     <input type="submit" value="Login">
 </form>
+*로그인이 정상적으로 이루어지지 않는 문제가 발생할수 있습니다. 문제가 발생할 경우, 재접속 후 다시 한 번 시도해주세요.
 </body>
 </html>
