@@ -100,7 +100,7 @@ public class ClassVideoDAO {
         CommentDAO childdao = new CommentDAO();
 
         try {
-            statement = con.prepareStatement("SELECT * FROM CLASS_TABLE WHERE ID = ?");
+            statement = con.prepareStatement("SELECT * FROM CLASS_VIDEO_TABLE WHERE ID = ?");
             statement.setInt(1, classVideoId);
             set = statement.executeQuery();
 
@@ -143,7 +143,7 @@ public class ClassVideoDAO {
         CommentDAO childdao = new CommentDAO();
 
         try {
-            statement = con.prepareStatement("SELECT * FROM CLASS_TABLE WHERE PARENTID = ?");
+            statement = con.prepareStatement("SELECT * FROM CLASS_VIDEO_TABLE WHERE PARENTID = ?");
             statement.setInt(1, ParentId);
             set = statement.executeQuery();
 

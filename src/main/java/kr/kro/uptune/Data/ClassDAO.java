@@ -25,8 +25,8 @@ public class ClassDAO {
             insertstatement = con.prepareStatement("INSERT INTO CLASS_TABLE VALUES (?,?,?,?)");
             insertstatement.setInt(1, dto.getClassId());
             insertstatement.setString(2, dto.getClassName());
-            insertstatement.setInt(3, dto.getClassWriter());
-            insertstatement.setTimestamp(4, dto.getClassTimeStamp());
+            insertstatement.setTimestamp(3, dto.getClassTimeStamp());
+            insertstatement.setInt(4, dto.getClassWriter());
 
             set = insertstatement.executeQuery();
 

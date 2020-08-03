@@ -14,11 +14,10 @@
     <title>UTUC - Uptune Tutorial Upload Center</title>
 </head>
 <body>
-
+<% request.setCharacterEncoding("UTF-8"); %>
 <%
 ClassDAO classdao = new ClassDAO();
 ArrayList<ClassDTO> classlist = classdao.getAll();
-Iterator<ClassDTO> classiterator = classlist.iterator();
 %>
 
 
@@ -26,14 +25,13 @@ Add admin user...<br>
 <form method="post" action="./UTUCAdminAdd">
     <input type="text" placeholder="ID" name="userID" maxlength="25">
     <input type="submit" value="Add">
-</form><br>
+</form>
 강좌 목록<br>
 <%
-    while(classiterator.hasNext()) {
-        ClassDTO classdto = classiterator.next();
+    for(ClassDTO classdto : classlist) {
 %>
-<form method="get" action="./">
-    <input type="hidden" id="classId" value=<%= classdto.getClassId()%>>
+<form method="get" action="./utucclassedit.jsp">
+    <input type="hidden" name="classId" value=<%= classdto.getClassId()%>>
     <input type="submit" value=<%= classdto.getClassName() %>>
 </form>
 <br>
