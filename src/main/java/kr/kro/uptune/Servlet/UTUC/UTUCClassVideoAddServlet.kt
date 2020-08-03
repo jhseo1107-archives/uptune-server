@@ -45,7 +45,7 @@ class UTUCClassVideoAddServlet : HttpServlet() {
         videodto.classVideoParentId = Integer.valueOf(parentid)
 
         videodao.write(videodto)
-
+        videodao.disconnect()
         res.sendRedirect("./utucclassedit.jsp?classId="+parentid)
     }
 }

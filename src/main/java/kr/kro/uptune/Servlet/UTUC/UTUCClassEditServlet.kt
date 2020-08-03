@@ -48,6 +48,6 @@ class UTUCClassEditServlet : HttpServlet() {
             res.writer.print("delete")
             res.sendRedirect("./utucedit.jsp")
         }
-
+        classdao.disconnect()
     }
 }

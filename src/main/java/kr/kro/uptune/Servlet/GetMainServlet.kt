@@ -19,6 +19,7 @@ class GetMainServlet : HttpServlet() {
 
     private fun doProcess(req: HttpServletRequest, res: HttpServletResponse) {
         res.contentType = "text/plain; charset=utf-8"
+        req.characterEncoding = "UTF-8"
 
         var session = req.getSession(true)
         var jsonObject = JSONObject()

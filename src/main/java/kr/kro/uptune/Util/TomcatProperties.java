@@ -9,8 +9,4 @@ public class TomcatProperties {
         String returntext = System.getProperty("uptunemailpassword");
         return returntext;
     }
-    public static int ClassVideoCount()
-    {
-        return 0;
-    }
 }

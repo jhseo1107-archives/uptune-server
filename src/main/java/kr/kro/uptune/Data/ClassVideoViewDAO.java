@@ -3,6 +3,7 @@ package kr.kro.uptune.Data;
 import kr.kro.uptune.Util.TomcatProperties;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ClassVideoViewDAO { // 시청 여부 저장 DAO. 클래스명 비직관적이어서 주석처리
     private static Connection con = null;
@@ -121,6 +122,27 @@ public class ClassVideoViewDAO { // 시청 여부 저장 DAO. 클래스명 비�
             }
 
         }
+
+        return returnvalue;
+    }
+    public int viewPercentage(int userId, int classId)
+    {
+        int returnvalue;
+
+        int viewedcount = 0;
+
+        ClassDAO classdao = new ClassDAO();
+
+        ArrayList<ClassVideoDTO> videolist = classdao.getFromClassId(classId).getClassVideo();
+
+        for(int i= 0; i<videolist.size(); i++)
+        {
+            if(hasViewed(userId, videolist.get(i).getClassVideoId()))
+                viewedcount++;
+
+        }
+
+        returnvalue = 100 * (viewedcount/videolist.size());
 
         return returnvalue;
     }

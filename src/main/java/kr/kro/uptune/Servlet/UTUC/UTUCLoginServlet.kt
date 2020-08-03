@@ -37,6 +37,7 @@ class UTUCLoginServlet : HttpServlet() {
         var userdto = UserDTO()
 
         userdto = userdao.getFromUserEmail(mail)
+        userdao.disconnect()
 
         var serversidepw = userdto.userPassword
 

@@ -51,5 +51,6 @@ class UTUCClassVideoEditServlet : HttpServlet() {
             res.writer.print("delete")
             res.sendRedirect("./utucclassedit.jsp?classId="+classId)
         }
+        classvideodao.disconnect()
     }
 }

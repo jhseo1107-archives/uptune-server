@@ -29,5 +29,6 @@ class UTUCAdminAddServlet : HttpServlet() {
         }
         var userdao = UserDAO()
         userdao.editToAdmin(mail)
+        userdao.disconnect()
     }
 }

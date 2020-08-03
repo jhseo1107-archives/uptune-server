@@ -44,7 +44,7 @@ class UTUCClassAddServlet : HttpServlet() {
         classdto.classTimeStamp = Timestamp(System.currentTimeMillis())
 
         classdao.write(classdto)
-
+        classdao.disconnect()
         res.sendRedirect("./utucclassedit.jsp?classId="+classdto.classId)
 
     }
