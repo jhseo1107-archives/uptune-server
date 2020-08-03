@@ -5,15 +5,13 @@ import java.util.ArrayList;
 
 public class CommentDTO {
     private int CommentId;
-
-    public void setCommentWriter(int commentWriter) {
-        CommentWriter = commentWriter;
-    }
-
     private int CommentWriter;
     private Timestamp CommentTimeStamp;
     private String CommentContent;
+    private int CommentParentId;
+    private int CommentParentType;
     private ArrayList<CommentReplyDTO> CommentReply;
+
 
 
     public int getCommentId() {
@@ -22,6 +20,14 @@ public class CommentDTO {
 
     public void setCommentId(int commentId) {
         CommentId = commentId;
+    }
+
+    public int getCommentWriter() {
+        return CommentWriter;
+    }
+
+    public void setCommentWriter(int commentWriter) {
+        CommentWriter = commentWriter;
     }
 
     public Timestamp getCommentTimeStamp() {
@@ -46,5 +52,21 @@ public class CommentDTO {
 
     public void setCommentReply(ArrayList<CommentReplyDTO> commentReply) {
         CommentReply = commentReply;
+    }
+
+    public int getCommentParentId() {
+        return CommentParentId;
+    }
+
+    public void setCommentParentId(int commentParentId) {
+        CommentParentId = commentParentId;
+    }
+
+    public int getCommentParentType() {
+        return CommentParentType;
+    }
+
+    public void setCommentParentType(int commentParentType) {
+        CommentParentType = commentParentType;
     }
 }

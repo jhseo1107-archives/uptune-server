@@ -3,37 +3,49 @@ package kr.kro.uptune.Data;
 import java.sql.Timestamp;
 
 public class CommentReplyDTO {
-    private int CommentId;
-    private int CommentWriter;
-    private Timestamp CommentTimeStamp;
-    private String CommentContent;
+    private int CommentReplyId;
+    private String CommentReplyContent;
+    private Timestamp CommentReplyTimestamp;
+    private int CommentReplyWriter;
+    private int CommentReplyParentId;
 
-    public int getCommentId() {
-        return CommentId;
+    public int getCommentReplyId() {
+        return CommentReplyId;
     }
 
-    public void setCommentId(int commentId) {
-        CommentId = commentId;
+    public void setCommentReplyId(int commentReplyId) {
+        CommentReplyId = commentReplyId;
     }
 
-    public void setCommentWriter(int commentWriter) {
-        CommentWriter = commentWriter;
+    public String getCommentReplyContent() {
+        return CommentReplyContent;
     }
 
-    public Timestamp getCommentTimeStamp() {
-        return CommentTimeStamp;
+    public void setCommentReplyContent(String commentReplyContent) {
+        CommentReplyContent = commentReplyContent;
     }
 
-    public void setCommentTimeStamp(Timestamp commentTimeStamp) {
-        CommentTimeStamp = commentTimeStamp;
+    public Timestamp getCommentReplyTimestamp() {
+        return CommentReplyTimestamp;
     }
 
-    public String getCommentContent() {
-        return CommentContent;
+    public void setCommentReplyTimestamp(Timestamp commentReplyTimestamp) {
+        CommentReplyTimestamp = commentReplyTimestamp;
     }
 
-    public void setCommentContent(String commentContent) {
-        CommentContent = commentContent;
+    public int getCommentReplyWriter() {
+        return CommentReplyWriter;
     }
 
+    public void setCommentReplyWriter(int commentReplyWriter) {
+        CommentReplyWriter = commentReplyWriter;
+    }
+
+    public int getCommentReplyParentId() {
+        return CommentReplyParentId;
+    }
+
+    public void setCommentReplyParentId(int commentReplyParentId) {
+        CommentReplyParentId = commentReplyParentId;
+    }
 }

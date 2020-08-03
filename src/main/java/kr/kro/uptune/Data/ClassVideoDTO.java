@@ -8,6 +8,16 @@ public class ClassVideoDTO {
     private String ClassVideoName;
     private int ClassVideoWriter;
     private Timestamp ClassVideoTimeStamp;
+    private int ClassVideoParentId;
+
+    public int getClassVideoParentId() {
+        return ClassVideoParentId;
+    }
+
+    public void setClassVideoParentId(int classVideoParentId) {
+        ClassVideoParentId = classVideoParentId;
+    }
+
     private String ClassVideoLink;
 
     public int getClassVideoId() {
@@ -16,6 +26,11 @@ public class ClassVideoDTO {
 
     public void setClassVideoId(int classVideoId) {
         ClassVideoId = classVideoId;
+    }
+
+
+    public int getClassVideoWriter() {
+        return ClassVideoWriter;
     }
 
     public void setClassVideoWriter(int classVideoWriter) {
@@ -46,13 +61,13 @@ public class ClassVideoDTO {
         ClassVideoLink = classVideoLink;
     }
 
-    public ArrayList<CommentDTO> getClassVideoReply() {
-        return ClassVideoReply;
+    public ArrayList<CommentDTO> getClassVideoComment() {
+        return ClassVideoComment;
     }
 
-    public void setClassVideoReply(ArrayList<CommentDTO> classVideoReply) {
-        ClassVideoReply = classVideoReply;
+    public void setClassVideoComment(ArrayList<CommentDTO> classVideoComment) {
+        ClassVideoComment = classVideoComment;
     }
 
-    private ArrayList<CommentDTO> ClassVideoReply;
+    private ArrayList<CommentDTO> ClassVideoComment;
 }

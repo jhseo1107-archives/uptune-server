@@ -18,44 +18,28 @@ public class ClassDAO {
     }
 
     public void write(ClassDTO dto) {
-        PreparedStatement statement = null;
+        PreparedStatement insertstatement = null;
         ResultSet set = null;
-        PreparedStatement tablewritestmnt = null;
-        ResultSet tablewriteset = null;
         try {
-            statement = con.prepareStatement("INSERT INTO CLASS_TABLE VALUES (?,?,?,?)");
-            statement.setInt(1, dto.getClassId());
-            statement.setString(2, dto.getClassName());
-            statement.setInt(3, dto.getClassWriter());
-            statement.setTimestamp(4, dto.getClassTimeStamp());
+            insertstatement = con.prepareStatement("INSERT INTO CLASS_TABLE VALUES (?,?,?,?)");
+            insertstatement.setInt(1, dto.getClassId());
+            insertstatement.setString(2, dto.getClassName());
+            insertstatement.setInt(3, dto.getClassWriter());
+            insertstatement.setTimestamp(4, dto.getClassTimeStamp());
 
-            set = statement.executeQuery();
+            set = insertstatement.executeQuery();
 
             while (set.next()) {
 
             }
-
-            tablewritestmnt = con.prepareStatement("CREATE TABLE CLASSVIDEO_?_TABLE" +
-                    "(ID BIGINT NOT NULL," +
-                    " NAME varchar(20) NOT NULL," +
-                    " TIMESTAMP timestamp NOT NULL," +
-                    " WRITERID BIGINT NOT NULL," +
-                    " LINK varchar(20) NOT NULL," +
-                    " PRIMARY KEY(ID))" +
-                    " ENGINE = InnoDB CHARSET = utf8;");
-            tablewritestmnt.setInt(1, dto.getClassId());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if (statement != null)
-                    statement.close();
+                if (insertstatement != null)
+                    insertstatement.close();
                 if (set != null)
                     set.close();
-                if(tablewritestmnt != null)
-                    tablewritestmnt.close();
-                if(tablewriteset != null)
-                    tablewriteset.close();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -70,7 +54,7 @@ public class ClassDAO {
         ResultSet set = null;
         try {
 
-            statement = con.prepareStatement("SELECT COUNT(*) FROM CLASSVIDEO_?_TABLE");
+            statement = con.prepareStatement("SELECT COUNT(*) FROM CLASS_TABLE");
             set = statement.executeQuery();
 
             while (set.next()) {
@@ -108,6 +92,8 @@ public class ClassDAO {
         PreparedStatement statement = null;
         ResultSet set = null;
 
+        ClassVideoDAO childdao = new ClassVideoDAO();
+
         try {
             statement = con.prepareStatement("SELECT * FROM CLASS_TABLE WHERE ID = ?");
             statement.setInt(1, classId);
@@ -118,7 +104,11 @@ public class ClassDAO {
                 returndto.setClassName(set.getString(2));
                 returndto.setClassTimeStamp(set.getTimestamp(3));
                 returndto.setClassWriter(set.getInt(4));
+                returndto.setClassVideo(childdao.getFromParentId(classId));
             }
+
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,6 +118,7 @@ public class ClassDAO {
                     statement.close();
                 if (set != null)
                     set.close();
+                childdao.disconnect();
 
             } catch (Exception e) {
                 e.printStackTrace();
