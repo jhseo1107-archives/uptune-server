@@ -137,13 +137,19 @@ public class ClassVideoViewDAO { // 시청 여부 저장 DAO. 클래스명 비�
 
         for(int i= 0; i<videolist.size(); i++)
         {
+            if(videolist.get(i).getClassVideoName() == "Deleted")
+                continue;
+
             if(hasViewed(userId, videolist.get(i).getClassVideoId()))
                 viewedcount++;
 
         }
 
-        returnvalue = 100 * (viewedcount/videolist.size());
 
+        if(videolist.size() == 0)
+            return 0;
+
+        returnvalue = 100 * (viewedcount/videolist.size());
         return returnvalue;
     }
 }

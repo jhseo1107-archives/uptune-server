@@ -4,6 +4,7 @@ import kr.kro.uptune.Util.ParentType;
 import kr.kro.uptune.Util.TomcatProperties;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class TrendDAO {
     protected static Connection con = null;
@@ -184,6 +185,49 @@ public class TrendDAO {
         }
 
 
+        return returndto;
+    }
+    public ArrayList<TrendDTO> getHighLikes(int num)
+    {
+        ArrayList<TrendDTO> returndto = new ArrayList<TrendDTO>();
+        PreparedStatement statement = null;
+        ResultSet set = null;
+
+        CommentDAO childdao = new CommentDAO();
+
+        try {
+            statement = con.prepareStatement("SELECT * FROM TREND_TABLE ORDER BY LIKES DESC LIMIT ?");
+            statement.setInt(1, num);
+            set = statement.executeQuery();
+
+            while (set.next()) {
+                TrendDTO tempdto = new TrendDTO();
+                tempdto.setTrendId(set.getInt(1));
+                tempdto.setTrendName(set.getString(2));
+                tempdto.setTrendTimeStamp(set.getTimestamp(3));
+                tempdto.setTrendWriter(set.getInt(4));
+                tempdto.setTrendLikes(set.getInt(5));
+                tempdto.setTrendFileExtension(set.getString(6));
+                tempdto.setTrendComments(childdao.getFromParentId(set.getInt(1), ParentType.CLASS_VIDEO));
+
+                returndto.add(tempdto);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
+                if (set != null)
+                    set.close();
+                childdao.disconnect();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
         return returndto;
     }
 }
