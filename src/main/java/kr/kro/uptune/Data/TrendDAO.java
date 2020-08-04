@@ -139,7 +139,7 @@ public class TrendDAO {
                 returndto.setTrendWriter(set.getInt(4));
                 returndto.setTrendLikes(set.getInt(5));
                 returndto.setTrendFileExtension(set.getString(6));
-                returndto.setTrendComments(childdao.getFromParentId(trendId, ParentType.CLASS_VIDEO));
+                returndto.setTrendComments(childdao.getFromParentId(trendId, ParentType.TREND_VIDEO));
             }
 
         } catch (Exception e) {
@@ -182,7 +182,7 @@ public class TrendDAO {
                 tempdto.setTrendWriter(set.getInt(4));
                 tempdto.setTrendLikes(set.getInt(5));
                 tempdto.setTrendFileExtension(set.getString(6));
-                tempdto.setTrendComments(childdao.getFromParentId(set.getInt(1), ParentType.CLASS_VIDEO));
+                tempdto.setTrendComments(childdao.getFromParentId(set.getInt(1), ParentType.TREND_VIDEO));
 
                 returndto.add(tempdto);
             }
@@ -226,7 +226,7 @@ public class TrendDAO {
                 tempdto.setTrendWriter(set.getInt(4));
                 tempdto.setTrendLikes(set.getInt(5));
                 tempdto.setTrendFileExtension(set.getString(6));
-                tempdto.setTrendComments(childdao.getFromParentId(set.getInt(1), ParentType.CLASS_VIDEO));
+                tempdto.setTrendComments(childdao.getFromParentId(set.getInt(1), ParentType.TREND_VIDEO));
 
                 returndto.add(tempdto);
             }
