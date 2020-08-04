@@ -55,9 +55,10 @@ public class CommentDAO {
         PreparedStatement statement = null;
         ResultSet set = null;
         try {
-            statement = con.prepareStatement("UPDATE COMMENT_TABLE SET CONTENT = ? WHERE ID = ?");
+            statement = con.prepareStatement("UPDATE COMMENT_TABLE SET CONTENT = ? ,TIMESTAMP = ? WHERE ID = ?");
             statement.setString(1, dto.getCommentContent());
-            statement.setInt(2, dto.getCommentId());
+            statement.setTimestamp(2, dto.getCommentTimeStamp());
+            statement.setInt(3, dto.getCommentId());
             set = statement.executeQuery();
 
             while (set.next()) {

@@ -56,37 +56,11 @@ public class TrendDAO {
         PreparedStatement statement = null;
         ResultSet set = null;
         try {
-            statement = con.prepareStatement("UPDATE TREND_TABLE SET NAME = ? WHERE ID = ?");
+            statement = con.prepareStatement("UPDATE TREND_TABLE SET NAME = ? ,LIKES = ? ,TIMESTAMP = ? WHERE ID = ?");
             statement.setString(1, dto.getTrendName());
-            statement.setInt(2, dto.getTrendId());
-            set = statement.executeQuery();
-
-            while (set.next()) {
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (statement != null)
-                    statement.close();
-                if (set != null)
-                    set.close();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-    public void updateLike(TrendDTO dto)
-    {
-        PreparedStatement statement = null;
-        ResultSet set = null;
-        try {
-            statement = con.prepareStatement("UPDATE TREND_TABLE SET LIKES = ? WHERE ID = ?");
-            statement.setInt(1, dto.getTrendLikes());
-            statement.setInt(2, dto.getTrendId());
+            statement.setInt(2, dto.getTrendLikes());
+            statement.setTimestamp(3, dto.getTrendTimeStamp());
+            statement.setInt(4, dto.getTrendId());
             set = statement.executeQuery();
 
             while (set.next()) {

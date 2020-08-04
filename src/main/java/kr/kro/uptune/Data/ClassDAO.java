@@ -53,9 +53,10 @@ public class ClassDAO {
         PreparedStatement statement = null;
         ResultSet set = null;
         try {
-            statement = con.prepareStatement("UPDATE CLASS_TABLE SET NAME = ? WHERE ID = ?");
+            statement = con.prepareStatement("UPDATE CLASS_TABLE SET NAME = ? ,TIMESTAMP = ? WHERE ID = ?");
             statement.setString(1, dto.getClassName());
-            statement.setInt(2, dto.getClassId());
+            statement.setTimestamp(2, dto.getClassTimeStamp());
+            statement.setInt(3, dto.getClassId());
             set = statement.executeQuery();
 
             while (set.next()) {

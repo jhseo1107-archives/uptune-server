@@ -57,9 +57,10 @@ public class ClassVideoDAO {
         PreparedStatement statement = null;
         ResultSet set = null;
         try {
-            statement = con.prepareStatement("UPDATE CLASS_VIDEO_TABLE SET NAME = ? WHERE ID = ?");
+            statement = con.prepareStatement("UPDATE CLASS_VIDEO_TABLE SET NAME = ? ,TIMESTAMP = ? WHERE ID = ?");
             statement.setString(1, dto.getClassVideoName());
-            statement.setInt(2, dto.getClassVideoId());
+            statement.setTimestamp(2, dto.getClassVideoTimeStamp());
+            statement.setInt(3, dto.getClassVideoId());
             set = statement.executeQuery();
 
             while (set.next()) {

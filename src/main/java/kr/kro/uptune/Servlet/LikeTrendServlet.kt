@@ -48,7 +48,7 @@ class LikeTrendServlet : HttpServlet() {
         }
 
         trenddto.trendLikes += 1
-        trenddao.updateLike(trenddto)
+        trenddao.update(trenddto)
 
         trendlikedao.write(session.getAttribute("userno") as Int, Integer.valueOf(trendid))
 
