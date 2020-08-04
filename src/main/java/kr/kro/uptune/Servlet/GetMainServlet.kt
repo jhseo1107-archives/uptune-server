@@ -120,7 +120,7 @@ class GetMainServlet : HttpServlet() {
 
         if(flag - countedflags > 0)
         {
-            countedflags += (flag-countedflags)
+            countedflags = flag
             return getTopTrend(dao, num+flag)
         }
 

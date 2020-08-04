@@ -45,9 +45,10 @@ class ReportCommentServlet : HttpServlet() {
 
         var userdao = UserDAO()
         var useremail = userdao.getFromUserNo(commentdto.commentWriter).userEmail
+        var commentcontent = commentdto.commentContent
         userdao.disconnect()
 
-        SendCommentReportMail("uptune.software@gmail.com","seojanghyeob@gmail.com",Integer.valueOf(commentid), ReportReason(Integer.valueOf(commentreportreason)), useremail)
+        SendCommentReportMail("uptune.software@gmail.com","seojanghyeob@gmail.com",Integer.valueOf(commentid), ReportReason(Integer.valueOf(commentreportreason)), useremail, commentcontent)
 
 
         jsonObject.put("status", 200)

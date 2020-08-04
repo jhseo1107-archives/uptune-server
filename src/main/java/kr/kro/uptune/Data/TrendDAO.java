@@ -204,4 +204,48 @@ public class TrendDAO {
         }
         return returndto;
     }
+    public ArrayList<TrendDTO> getRecent(int num, int count)
+    {
+        ArrayList<TrendDTO> returndto = new ArrayList<TrendDTO>();
+        PreparedStatement statement = null;
+        ResultSet set = null;
+
+        CommentDAO childdao = new CommentDAO();
+
+        try {
+            statement = con.prepareStatement("SELECT * FROM TREND_TABLE ORDER BY ID DESC LIMIT ?, ?");
+            statement.setInt(1, num);
+            statement.setInt(2, count);
+            set = statement.executeQuery();
+
+            while (set.next()) {
+                TrendDTO tempdto = new TrendDTO();
+                tempdto.setTrendId(set.getInt(1));
+                tempdto.setTrendName(set.getString(2));
+                tempdto.setTrendTimeStamp(set.getTimestamp(3));
+                tempdto.setTrendWriter(set.getInt(4));
+                tempdto.setTrendLikes(set.getInt(5));
+                tempdto.setTrendFileExtension(set.getString(6));
+                tempdto.setTrendComments(childdao.getFromParentId(set.getInt(1), ParentType.CLASS_VIDEO));
+
+                returndto.add(tempdto);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
+                if (set != null)
+                    set.close();
+                childdao.disconnect();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        return returndto;
+    }
 }

@@ -79,7 +79,7 @@ fun SendTrendReportMail(sender: String, reciever: String, trendid: Int, trendfil
 
 
 }
-fun SendCommentReportMail(sender: String, reciever: String, commentid: Int, content: String, commentwriteremail : String) {
+fun SendCommentReportMail(sender: String, reciever: String, commentid: Int, content: String, commentwriteremail : String, commentcontent: String) {
     var from = sender
     var to = reciever
     var host = "smtp.gmail.com"
@@ -107,7 +107,7 @@ fun SendCommentReportMail(sender: String, reciever: String, commentid: Int, cont
             "<html>\n" +
             "    <body style=\"text-align: center\">\n" +
             "        <h1>Comment Report</h1>\n" +
-            "        <h2>Comment code : "+commentid+" by "+commentwriteremail+"</h2>\n" +
+            "        <h2>Comment code : "+commentid+" by "+commentwriteremail+" : "+commentcontent+"</h2>\n" +
             "        <h3>Reason : "+content+"</h3>\n" +
             "    </body>\n" +
             "</html>","text/html; charset=UTF-8")
@@ -116,7 +116,7 @@ fun SendCommentReportMail(sender: String, reciever: String, commentid: Int, cont
 
 
 }
-fun SendCommentReplyReportMail(sender: String, reciever: String, commentreplyid: Int, content: String, commentreplywriteremail : String) {
+fun SendCommentReplyReportMail(sender: String, reciever: String, commentreplyid: Int, content: String, commentreplywriteremail : String, commentreplycontent: String) {
     var from = sender
     var to = reciever
     var host = "smtp.gmail.com"
@@ -144,7 +144,7 @@ fun SendCommentReplyReportMail(sender: String, reciever: String, commentreplyid:
             "<html>\n" +
             "    <body style=\"text-align: center\">\n" +
             "        <h1>CommentReply Report</h1>\n" +
-            "        <h2>CommentReply code : "+commentreplyid+" by "+commentreplywriteremail+"</h2>\n" +
+            "        <h2>CommentReply code : "+commentreplyid+" by "+commentreplywriteremail+" : "+commentreplycontent+"</h2>\n" +
             "        <h3>Reason : "+content+"</h3>\n" +
             "    </body>\n" +
             "</html>","text/html; charset=UTF-8")
