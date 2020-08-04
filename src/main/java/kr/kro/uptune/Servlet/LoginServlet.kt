@@ -50,6 +50,10 @@ class LoginServlet : HttpServlet() {
             session.setAttribute("username", userdto.userName)
             session.setAttribute("userno", userdto.userNo)
         }
+        else if (userdto.userPassword == "Deleted")
+        {
+            jsonobject.put("status", 403.8)
+        }
         else
         {
             jsonobject.put("status", 403)

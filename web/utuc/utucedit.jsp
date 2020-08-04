@@ -44,5 +44,16 @@ Add admin user...<br>
     <input type="submit" value="Add">
 </form>
 
+트렌드 영상 삭제 (이용약관 위반의 경우)<br>
+<form method="post" action="./UTUCTrendDelete">
+    <input type="text" placeholder="Trend ID" name="trendid">
+    <input type="submit" value="Delete">
+</form>
+유저 삭제 (이용약관 위반의 경우)<br>
+<form method="post" action="./UTUCUserDelete">
+    <input type="text" placeholder="User E-mail" name="useremail">
+    <input type="submit" value="Delete">
+</form>
+
 </body>
 </html>

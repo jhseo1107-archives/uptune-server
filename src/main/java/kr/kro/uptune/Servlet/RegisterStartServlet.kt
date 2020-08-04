@@ -56,7 +56,11 @@ class RegisterStartServlet : HttpServlet() {
         session.setAttribute("auth", rannum)
         session.setAttribute("usrname", username)
 
-        res.writer.print(rannum) // Debug Purposes
+        //res.writer.print(rannum) // Debug Purposes
         SendMail("uptune.software@gmail.com", mail, rannum);
+
+
+        jsonobj.put("status", 200)
+        res.writer.print(jsonobj.toJSONString())
     }
 }

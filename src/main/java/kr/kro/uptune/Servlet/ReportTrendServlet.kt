@@ -1,19 +1,19 @@
 package kr.kro.uptune.Servlet
 
 import kr.kro.uptune.Data.TrendDAO
-import kr.kro.uptune.Data.TrendDTO
 import kr.kro.uptune.Data.UserDAO
+import kr.kro.uptune.Util.SendMail
+import kr.kro.uptune.Util.SendReportMail
+import kr.kro.uptune.Util.TrendReportReason
 import kr.kro.uptune.Util.isCorrectSession
 import org.json.simple.JSONObject
-import java.nio.file.Files
-import java.nio.file.Paths
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "kr.kro.uptune.Servlet.DeleteTrendServlet", value = ["/deleteTrend"])
-class DeleteTrendServlet : HttpServlet() {
+@WebServlet(name = "kr.kro.uptune.Servlet.ReportTrendServlet", value = ["/reportTrend"])
+class ReportTrendServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
     }
@@ -22,7 +22,7 @@ class DeleteTrendServlet : HttpServlet() {
         doProcess(req, res)
     }
 
-    private fun doProcess(req: HttpServletRequest, res: HttpServletResponse) { // public for UTUCTrendDeleteServlet.kt
+    private fun doProcess(req: HttpServletRequest, res: HttpServletResponse) {
         res.contentType = "text/plain; charset=utf-8"
         req.characterEncoding = "UTF-8"
 
@@ -36,27 +36,20 @@ class DeleteTrendServlet : HttpServlet() {
             return
         }
 
-        var trenddao = TrendDAO()
-        var trenddto = TrendDTO()
-
         var trendid = req.getParameter("trendid")
+        var trendreportreason = req.getParameter("reportreason")
 
-        trenddto =  trenddao.getFromTrendId(Integer.valueOf(trendid))
-
-
-        if(trenddto.trendWriter != session.getAttribute("userno"))
-        {
-            jsonObject.put("status", 403)
-            res.writer.print(jsonObject.toJSONString())
-            return
-        }
-
-        trenddto.trendName = "Deleted"
-        trenddao.update(trenddto)
-
+        var trenddao = TrendDAO()
+        var trenddto = trenddao.getFromTrendId(Integer.valueOf(trendid))
+        var trendfileextension = trenddto.trendFileExtension
         trenddao.disconnect()
 
-        Files.deleteIfExists(Paths.get(servletContext.getRealPath("Videos/")+trenddto.trendId+"."+trenddto.trendFileExtension))
+        var userdao = UserDAO()
+        var useremail = userdao.getFromUserNo(trenddto.trendWriter).userEmail
+        userdao.disconnect()
+
+        SendReportMail("uptune.software@gmail.com","seojanghyeob@gmail.com",Integer.valueOf(trendid),trendfileextension, TrendReportReason(Integer.valueOf(trendreportreason)), useremail)
+
 
         jsonObject.put("status", 200)
         res.writer.print(jsonObject.toJSONString())

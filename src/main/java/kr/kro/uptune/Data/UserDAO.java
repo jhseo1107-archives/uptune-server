@@ -106,6 +106,34 @@ public class UserDAO {
 
         }
     }
+    public void updatepw(UserDTO dto)
+    {
+        PreparedStatement statement = null;
+        ResultSet set = null;
+        try {
+            statement = con.prepareStatement("UPDATE USER_TABLE SET PW = ? WHERE USER_NO = ?");
+            statement.setString(1, dto.getUserPassword());
+            statement.setInt(2, dto.getUserNo());
+            set = statement.executeQuery();
+
+            while (set.next()) {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
+                if (set != null)
+                    set.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 
     public void disconnect() {
         try {
@@ -160,8 +188,8 @@ public class UserDAO {
 
             while (set.next()) {
                 returndto.setUserNo(set.getInt(1));
-                returndto.setUserEmail(set.getString(2));
-                returndto.setUserName(set.getString(3));
+                returndto.setUserName(set.getString(2));
+                returndto.setUserEmail(set.getString(3));
                 returndto.setUserPassword(set.getString(4));
                 returndto.setUserIsAdmin(set.getBoolean(5));
             }
@@ -229,8 +257,8 @@ public class UserDAO {
             while(set.next())
             {
                 returndto.setUserNo(set.getInt(1));
-                returndto.setUserEmail(set.getString(2));
-                returndto.setUserName(set.getString(3));
+                returndto.setUserName(set.getString(2));
+                returndto.setUserEmail(set.getString(3));
                 returndto.setUserPassword(set.getString(4));
                 returndto.setUserIsAdmin(set.getBoolean(5));
             }
