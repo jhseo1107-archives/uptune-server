@@ -1,6 +1,6 @@
 package kr.kro.uptune.Util
 
-fun TrendReportReason(value : Int) : String
+fun ReportReason(value : Int) : String
 {
     var returnvalue = ""
     when(value) {

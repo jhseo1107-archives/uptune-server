@@ -2,9 +2,8 @@ package kr.kro.uptune.Servlet
 
 import kr.kro.uptune.Data.TrendDAO
 import kr.kro.uptune.Data.UserDAO
-import kr.kro.uptune.Util.SendMail
-import kr.kro.uptune.Util.SendReportMail
-import kr.kro.uptune.Util.TrendReportReason
+import kr.kro.uptune.Util.SendTrendReportMail
+import kr.kro.uptune.Util.ReportReason
 import kr.kro.uptune.Util.isCorrectSession
 import org.json.simple.JSONObject
 import javax.servlet.annotation.WebServlet
@@ -48,7 +47,7 @@ class ReportTrendServlet : HttpServlet() {
         var useremail = userdao.getFromUserNo(trenddto.trendWriter).userEmail
         userdao.disconnect()
 
-        SendReportMail("uptune.software@gmail.com","seojanghyeob@gmail.com",Integer.valueOf(trendid),trendfileextension, TrendReportReason(Integer.valueOf(trendreportreason)), useremail)
+        SendTrendReportMail("uptune.software@gmail.com","seojanghyeob@gmail.com",Integer.valueOf(trendid),trendfileextension, ReportReason(Integer.valueOf(trendreportreason)), useremail)
 
 
         jsonObject.put("status", 200)

@@ -1,18 +1,18 @@
-package kr.kro.uptune.Servlet
+package kr.kro.uptune.Servlet.UTUC
 
 import kr.kro.uptune.Data.CommentDAO
 import kr.kro.uptune.Data.CommentDTO
-import kr.kro.uptune.Data.UserDAO
-import kr.kro.uptune.Util.isCorrectSession
+import kr.kro.uptune.Util.isCorrectUTUCSession
 import org.json.simple.JSONObject
-import java.sql.Timestamp
+import java.nio.file.Files
+import java.nio.file.Paths
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "kr.kro.uptune.Servlet.WriteCommentServlet", value = ["/writeComment"])
-class WriteCommentServlet : HttpServlet() {
+@WebServlet(name = "kr.kro.uptune.Servlet.UTUC.UTUCCommentDeleteServlet", value = ["/utuc/UTUCCommentDelete"])
+class UTUCCommentDeleteServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
     }
@@ -28,8 +28,7 @@ class WriteCommentServlet : HttpServlet() {
         var session = req.getSession(true)
         var jsonObject = JSONObject()
 
-
-        if(!isCorrectSession(session))
+        if(!isCorrectUTUCSession(session))
         {
             jsonObject.put("status", 403)
             res.writer.print(jsonObject.toJSONString())
@@ -39,24 +38,17 @@ class WriteCommentServlet : HttpServlet() {
         var commentdao = CommentDAO()
         var commentdto = CommentDTO()
 
-        var userNo = session.getAttribute("userno") as Int
+        var commentid = req.getParameter("commentid")
 
-        var commentContent = req.getParameter("content")
-        var commentParent = Integer.valueOf(req.getParameter("parent"))
-        var commentParentType = Integer.valueOf(req.getParameter("parenttype"))
+        commentdto =  commentdao.getFromCommentId(Integer.valueOf(commentid))
 
-        commentdto.commentId = commentdao.count() + 1
-        commentdto.commentContent = commentContent
-        commentdto.commentParentId = commentParent
-        commentdto.commentParentType = commentParentType
-        commentdto.commentWriter = userNo
-        commentdto.commentTimeStamp = Timestamp(System.currentTimeMillis())
 
-        commentdao.write(commentdto)
+        commentdto.commentContent = "Deleted"
+        commentdao.update(commentdto)
+
         commentdao.disconnect()
 
         jsonObject.put("status", 200)
         res.writer.print(jsonObject.toJSONString())
-
     }
 }

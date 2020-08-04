@@ -68,9 +68,6 @@ class GetClassVideosServlet : HttpServlet() {
 
             tempobject.put("id", dto.classVideoId)
             tempobject.put("name", dto.classVideoName)
-            tempobject.put("timestamp", sdf.format(dto.classVideoTimeStamp))
-            tempobject.put("writer", userdao.getFromUserNo(dto.classVideoWriter).userName)
-            tempobject.put("link",dto.classVideoLink)
             tempobject.put("hasviewed", classvideoviewdao.hasViewed(userId, dto.classVideoId))
 
             classvideoarray.add(tempobject)

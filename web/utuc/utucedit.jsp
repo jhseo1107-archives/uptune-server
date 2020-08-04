@@ -54,6 +54,16 @@ Add admin user...<br>
     <input type="text" placeholder="User E-mail" name="useremail">
     <input type="submit" value="Delete">
 </form>
+댓글 삭제 (이용약관 위반의 경우)<br>
+<form method="post" action="./UTUCCommentDelete">
+    <input type="text" placeholder="Comment ID" name="commentid">
+    <input type="submit" value="Delete">
+</form>
+답글 삭제 (이용약관 위반의 경우)<br>
+<form method="post" action="./UTUCCommentReplyDelete">
+    <input type="text" placeholder="CommentReply ID" name="commentreplyid">
+    <input type="submit" value="Delete">
+</form>
 
 </body>
 </html>
