@@ -1,4 +1,4 @@
-package kr.kro.uptune
+package kr.kro.uptune.Servlet
 
 import kr.kro.uptune.Data.TrendDAO
 import kr.kro.uptune.Data.TrendDTO
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "kr.kro.uptune.GetRecTrendsServlet", value = ["/getRecTrends"])
+@WebServlet(name = "kr.kro.uptune.Servlet.GetRecTrendsServlet", value = ["/getRecTrends"])
 class GetRecTrendsServlet : HttpServlet() {
     override fun doGet(req: HttpServletRequest, res: HttpServletResponse) {
         doProcess(req, res)
